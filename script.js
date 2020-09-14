@@ -231,6 +231,6 @@ btnSubmit.addEventListener('click', e => {
 	}
 });
 
-/* Start ! */
+/* Start */
 
 generateList();
