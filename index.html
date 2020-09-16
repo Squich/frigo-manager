@@ -1,72 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<link rel="stylesheet" href="style.css"/>
-		<title>Frigo Manager</title>
-	</head>
-	
-	<body>
-	
-		<div id="container">
-			
-			<section id="header">
-				<p class="title">Frigo Manager</p>
-				<div class="buttons">
-					<button id="btn-add" class="btn-add"><i class="fa fa-plus"></i>Ajouter</button>
-					<button id="btn-delete-all"><i class="fa fa-trash"></i></button>
-				</div>
-			</section>
-			
-			<section id="content">
-				<p class="today">Date d'aujourd'hui : <span id="date"></span></p>
-				<p id="empty">Votre liste est vide !</p>
-				<ul id="list"></ul>
-			</section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Frigo Manager</title>
+  </head>
 
-			<section id="panel-add">
-				<i id="btn-close-add" class="fa fa-times"></i>
-				<form id="form" class="form">
-					<p class="title" id="form-title"></p>
-					<div class="form-section">
-						<label for="form-name">Nom<span class="asterisk">*</span></label>
-						<input type="text" id="form-name" name="form-name" maxlength="20" placeholder="Nom du produit" autocomplete="off"/>
-					</div>
-					<div class="form-section">
-						<label for="form-date">DLC<span class="asterisk">*</span></label>
-						<input type="date" id="form-date" name="form-date">
-					</div>
-					<div class="form-section">
-						<label for="form-recipe">Recette</label>
-						<input type="text" id="form-recipe" name="form-recipe" maxlength="20" placeholder="Nom de la recette" autocomplete="off"/>
-					</div>
-					<div class="form-section">
-						<p>Entamé</p>
-						<div class="radio-container">
-							<input type="radio" id="opened-yes" name="opened" value='true'>
-							<label for="opened-yes">Oui</label>
-						</div>
-						<div class="radio-container">
-							<input type="radio" id="opened-no" name="opened" value='false'>
-							<label for="opened-no">Non</label>
-						</div>
-					</div>
-					<button type="submit" id="btn-submit" class="btn-add"><i class="fa fa-plus"></i></button>
-					<p class="mention"><span class="asterisk">*</span>Obligatoire</p>
-				</form>			
-			</section>
-			
-			<section id="footer">
-				<p>Fait avec <i class="fa fa-heart"></i> par <a href="https://github.com/Squich" target="_blank">Squich</a></p>
-			</section>
+  <body>
+    <div id="container">
+      <section id="header">
+        <p class="title">Frigo Manager CodeSandbox</p>
+        <div class="buttons">
+          <button id="btn-add" class="btn-add">
+            <i class="fa fa-plus"></i>Ajouter
+          </button>
+          <button id="btn-delete-all"><i class="fa fa-trash"></i></button>
+        </div>
+      </section>
 
-		</div>
-		
-		<script src="script.js"></script>
-		<script src="https://kit.fontawesome.com/4ad13589b0.js" crossorigin="anonymous"></script>
+      <section id="content">
+        <p class="today">Date d'aujourd'hui : <span id="date"></span></p>
+        <p id="empty">Votre liste est vide !</p>
+        <ul id="list"></ul>
+      </section>
 
-	</body>
-	
+      <section id="panel-add">
+        <i id="btn-close-add" class="fa fa-times"></i>
+        <form id="form" class="form">
+          <p class="title" id="form-title"></p>
+          <div class="form-section">
+            <label for="form-name">Nom<span class="asterisk">*</span></label>
+            <input
+              type="text"
+              id="form-name"
+              name="form-name"
+              maxlength="20"
+              placeholder="Nom du produit"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-section">
+            <label for="form-date">DLC<span class="asterisk">*</span></label>
+            <input type="date" id="form-date" name="form-date" />
+          </div>
+          <div class="form-section">
+            <label for="form-recipe">Recette</label>
+            <input
+              type="text"
+              id="form-recipe"
+              name="form-recipe"
+              maxlength="20"
+              placeholder="Nom de la recette"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-section">
+            <p>Entamé</p>
+            <div class="radio-container">
+              <input type="radio" id="opened-yes" name="opened" value="true" />
+              <label for="opened-yes">Oui</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" id="opened-no" name="opened" value="false" />
+              <label for="opened-no">Non</label>
+            </div>
+          </div>
+          <button type="submit" id="btn-submit" class="btn-add">
+            <i class="fa fa-plus"></i>
+          </button>
+          <p class="mention"><span class="asterisk">*</span>Obligatoire</p>
+        </form>
+      </section>
+
+      <section id="footer">
+        <p>
+          Fait avec <i class="fa fa-heart"></i> par
+          <a href="https://github.com/Squich" target="_blank">Squich</a>
+        </p>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/4ad13589b0.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
