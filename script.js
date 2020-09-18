@@ -35,43 +35,23 @@ const d = 1000 * 60 * 60 * 24;
 
 /* Date formats */
 
-const formatDateLong = (date) =>
-  `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${
-    date.getMonth() + 1
-  }-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
-const formatDateShort = (str) =>
-  str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
+const formatDateLong = (date) => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
+const formatDateShort = (str) => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
 
 /* Generate startList */
 
-const generateDate = (num) =>
-  formatDateLong(new Date(new Date().getTime() + num));
+const generateDate = (num) => formatDateLong(new Date(new Date().getTime() + num));
 
 const startList = [
-  { name: "Saumon", date: generateDate(-d * 9), recipe: "", opened: "true" },
-  {
-    name: "Fromage rapé",
-    date: generateDate(-d * 3),
-    recipe: "Omelette",
-    opened: "false"
-  },
-  {
-    name: "Crème fraiche",
-    date: generateDate(0),
-    recipe: "Chantilly",
-    opened: "false"
-  },
-  { name: "Saucisses", date: generateDate(d * 2), recipe: "", opened: "true" },
-  {
-    name: "Lardons",
-    date: generateDate(d * 2),
-    recipe: "Salade composée",
-    opened: "false"
-  },
-  { name: "Camembert", date: generateDate(d * 4), recipe: "", opened: "false" },
-  { name: "Lait", date: generateDate(d * 5), recipe: "", opened: "false" },
-  { name: "Pizza", date: generateDate(d * 7), recipe: "", opened: "true" },
-  { name: "Gnocchis", date: generateDate(d * 10), recipe: "", opened: "false" }
+  {name: "Saumon", date: generateDate(-d * 9), recipe: "", opened: "true"},
+  {name: "Fromage rapé", date: generateDate(-d * 3), recipe: "Omelette", opened: "false"},
+  {name: "Crème fraiche", date: generateDate(0), recipe: "Chantilly", opened: "false"},
+  {name: "Saucisses", date: generateDate(d * 2), recipe: "", opened: "true"},
+  {name: "Lardons", date: generateDate(d * 2), recipe: "Salade composée", opened: "false"},
+  {name: "Camembert", date: generateDate(d * 4), recipe: "", opened: "false"},
+  {name: "Lait", date: generateDate(d * 5), recipe: "", opened: "false"},
+  {name: "Pizza", date: generateDate(d * 7), recipe: "", opened: "true"},
+  {name: "Gnocchis", date: generateDate(d * 10), recipe: "", opened: "false"}
 ];
 
 /* Generate list with listItems */
@@ -96,11 +76,7 @@ function generateList() {
 				<span class="name">${item.name}</span>
 			</span>
 			<span>
-				${
-          item.recipe
-            ? '<span class="recipe-container"><i class="icon-recipe fa fa-tags"></i></span>'
-            : ""
-        }
+				${item.recipe ? '<span class="recipe-container"><i class="icon-recipe fa fa-tags"></i></span>' : ""}
 				<i class="btn-edit fa fa-pencil"></i>
 				<i class="btn-delete fa fa-times"></i>
 			</span>`;
@@ -109,8 +85,7 @@ function generateList() {
 
       const tooltipDLC = document.createElement("div");
       tooltipDLC.className = "tooltip";
-      tooltipDLC.textContent =
-        diff(item.date) + " jr" + (item.opened === "false" ? "" : " (entamé)");
+      tooltipDLC.textContent = diff(item.date) + " jr" + (item.opened === "false" ? "" : " (entamé)");
       listItem.querySelector(".smiley-container").prepend(tooltipDLC);
 
       if (item.recipe) {
@@ -123,13 +98,7 @@ function generateList() {
       /* Smiley */
 
       const smiley = document.createElement("i");
-      smiley.className =
-        "smiley fa " +
-        chooseSmiley(
-          item.opened === "false" || !item.opened ? diff(item.date) : Infinity
-        ) +
-        " " +
-        colorizeSmiley(diff(item.date));
+      smiley.className = "smiley fa " + chooseSmiley(item.opened === "false" || !item.opened ? diff(item.date) : Infinity) + " " + colorizeSmiley(diff(item.date));
       listItem.querySelector(".smiley-container").prepend(smiley);
 
       list.appendChild(listItem);
@@ -140,17 +109,12 @@ function generateList() {
 
 /* Set and Get from Local Storage */
 
-const setListItems = () =>
-  localStorage.setItem("listItems", JSON.stringify(listItems));
-const getListItems = () =>
-  (listItems = JSON.parse(localStorage.getItem("listItems")) || startList);
+const setListItems = () => localStorage.setItem("listItems", JSON.stringify(listItems));
+const getListItems = () => (listItems = JSON.parse(localStorage.getItem("listItems")) || startList);
 
 /* Display a message if the list is empty */
 
-const checkEmpty = () =>
-  listItems.length
-    ? (empty.classList.remove("active"), btnDeleteAll.classList.add("active"))
-    : (empty.classList.add("active"), btnDeleteAll.classList.remove("active"));
+const checkEmpty = () => (listItems.length ? (empty.classList.remove("active"), btnDeleteAll.classList.add("active")) : (empty.classList.add("active"), btnDeleteAll.classList.remove("active")));
 
 /* Delete ​​variables values and close the window */
 
@@ -166,8 +130,7 @@ const clearAndClose = () => {
 
 /* Generate the current date */
 
-const today = () =>
-  (date.textContent = formatDateShort(formatDateLong(new Date())));
+const today = () => (date.textContent = formatDateShort(formatDateLong(new Date())));
 
 /* Calculate the number of days between a DLC and today */
 
@@ -175,23 +138,12 @@ const diff = (date) => Math.ceil((new Date(date) - new Date()) / d);
 
 /* Choose and colorize the icon of the elements according to the remaining time and the Opened setting */
 
-const chooseSmiley = (num) =>
-  num < 0
-    ? "fa-frown-o"
-    : num < 4
-    ? "fa-meh-o"
-    : num === Infinity
-    ? "fa-exclamation"
-    : "fa-smile-o";
-const colorizeSmiley = (num) =>
-  num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green";
+const chooseSmiley = (num) => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
+const colorizeSmiley = (num) => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
 
 /* Check the radio buttons */
 
-const checkIfOpened = () =>
-  newItemOpened === "true"
-    ? (formOpenedYes.checked = true)
-    : (formOpenedNo.checked = true);
+const checkIfOpened = () => (newItemOpened === "true" ? (formOpenedYes.checked = true) : (formOpenedNo.checked = true));
 
 /* Display Panel Add */
 
@@ -209,10 +161,7 @@ list.addEventListener("click", (e) => {
   const index = e.target.parentElement.parentElement.dataset.index;
 
   /* Activate the tooltip for remaining days or the tooltip for the specified recipe */
-  if (
-    e.target.classList.contains("smiley") ||
-    e.target.classList.contains("icon-recipe")
-  ) {
+  if (e.target.classList.contains("smiley") || e.target.classList.contains("icon-recipe")) {
     e.target.classList.add("active");
     window.setTimeout(() => e.target.classList.remove("active"), 1000);
   }
@@ -260,22 +209,11 @@ btnDeleteAll.addEventListener("click", () => {
 /* Add item to list */
 
 formName.addEventListener("keyup", () => (newItemName = formName.value.trim()));
-formName.addEventListener(
-  "change",
-  () => (newItemName = formName.value.trim())
-);
+formName.addEventListener("change", () => (newItemName = formName.value.trim()));
 formDate.addEventListener("change", () => (newItemDate = formDate.value));
-formRecipe.addEventListener(
-  "keyup",
-  () => (newItemRecipe = formRecipe.value.trim())
-);
-formRecipe.addEventListener(
-  "change",
-  () => (newItemRecipe = formRecipe.value.trim())
-);
-formOpened.forEach((btn) =>
-  btn.addEventListener("change", () => (newItemOpened = btn.value))
-);
+formRecipe.addEventListener("keyup", () => (newItemRecipe = formRecipe.value.trim()));
+formRecipe.addEventListener("change", () => (newItemRecipe = formRecipe.value.trim()));
+formOpened.forEach((btn) => btn.addEventListener("change", () => (newItemOpened = btn.value)));
 
 btnSubmit.addEventListener("click", (e) => {
   e.preventDefault();
