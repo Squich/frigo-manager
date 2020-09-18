@@ -8,7 +8,6 @@ button:focus,
 input:focus {
   outline: none;
 }
-
 body {
   position: relative;
   padding: 8vh 0;
@@ -41,7 +40,6 @@ body {
   color: #606060;
   text-align: center;
 }
-
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -52,7 +50,6 @@ body {
   margin-bottom: -25px;
   transform: translateY(-25px);
 }
-
 .btn-add {
   display: flex;
   justify-content: center;
@@ -74,7 +71,6 @@ body {
 .btn-add i {
   padding-right: 15px;
 }
-
 #btn-delete-all {
   display: none;
   justify-content: center;
@@ -99,7 +95,6 @@ body {
 #content {
   padding: 25px 35px;
 }
-
 .today {
   font-size: 14px;
   margin: 0 0 15px;
@@ -107,7 +102,6 @@ body {
 #date {
   font-weight: 700;
 }
-
 #empty {
   display: none;
   font-size: 20px;
@@ -119,7 +113,6 @@ body {
 #empty.active {
   display: block;
 }
-
 #list {
   list-style: none;
   padding: 0;
@@ -183,7 +176,6 @@ body {
   cursor: pointer;
   color: #b9b9b9;
 }
-
 #list .tooltip {
   position: absolute;
   bottom: 100%;
@@ -260,7 +252,6 @@ body {
 #panel-add .btn-add {
   margin-top: 25px;
 }
-
 .form-section {
   margin-bottom: 15px;
 }
@@ -285,7 +276,6 @@ body {
 .form-section input:focus {
   border-color: #777;
 }
-
 .form-section p {
   margin: 0 0 15px;
   color: #777;
@@ -303,7 +293,6 @@ body {
 .radio-container label {
   margin: 0;
 }
-
 .mention {
   margin: 25px 0 0;
   font-size: 15px;
