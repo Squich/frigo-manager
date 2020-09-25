@@ -1,4 +1,4 @@
-/* Select DOM elements */
+// Select DOM elements
 
 const container = document.getElementById("container");
 const date = document.getElementById("date");
@@ -20,7 +20,7 @@ const formOpenedYes = document.getElementById("opened-yes");
 const formOpenedNo = document.getElementById("opened-no");
 const btnSubmit = document.getElementById("btn-submit");
 
-/* Variables */
+// Variables
 
 let listItems,
   newItemName = "",
@@ -29,18 +29,18 @@ let listItems,
   newItemOpened = "false",
   modifiedItemIndex = "";
 
-/* One day in milliseconds */
+// One day in milliseconds
 
 const d = 1000 * 60 * 60 * 24;
 
-/* Date formats */
+// Date formats
 
-const formatDateLong = (date) => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
-const formatDateShort = (str) => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
+const formatDateLong = date => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
+const formatDateShort = str => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
 
-/* Generate startList */
+// Generate startList
 
-const generateDate = (num) => formatDateLong(new Date(new Date().getTime() + num));
+const generateDate = num => formatDateLong(new Date(new Date().getTime() + num));
 
 const startList = [
   {name: "Saumon", date: generateDate(-d * 9), recipe: "", opened: "true"},
@@ -54,7 +54,7 @@ const startList = [
   {name: "Gnocchis", date: generateDate(d * 10), recipe: "", opened: "false"}
 ];
 
-/* Generate list with listItems */
+// Generate list with listItems
 
 function generateList() {
   getListItems();
@@ -65,7 +65,7 @@ function generateList() {
   listItems
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .forEach((item, i) => {
-      /* Li */
+      // Li
 
       const listItem = document.createElement("li");
       listItem.dataset.index = i;
@@ -81,7 +81,7 @@ function generateList() {
 				<i class="btn-delete fa fa-times"></i>
 			</span>`;
 
-      /* Tooltips */
+      // Tooltips
 
       const tooltipDLC = document.createElement("div");
       tooltipDLC.className = "tooltip";
@@ -95,7 +95,7 @@ function generateList() {
         listItem.querySelector(".recipe-container").append(tooltipRecipe);
       }
 
-      /* Smiley */
+      // Smiley
 
       const smiley = document.createElement("i");
       smiley.className = "smiley fa " + chooseSmiley(item.opened === "false" || !item.opened ? diff(item.date) : Infinity) + " " + colorizeSmiley(diff(item.date));
@@ -104,19 +104,19 @@ function generateList() {
       list.appendChild(listItem);
     });
 
-  console.log(listItems);
+  //console.log(listItems);
 }
 
-/* Set and Get from Local Storage */
+// Set and Get from Local Storage
 
 const setListItems = () => localStorage.setItem("listItems", JSON.stringify(listItems));
 const getListItems = () => (listItems = JSON.parse(localStorage.getItem("listItems")) || startList);
 
-/* Display a message if the list is empty */
+// Display a message if the list is empty
 
 const checkEmpty = () => (listItems.length ? (empty.classList.remove("active"), btnDeleteAll.classList.add("active")) : (empty.classList.add("active"), btnDeleteAll.classList.remove("active")));
 
-/* Delete ​​variables values and close the window */
+// Delete ​​variables values and close the window
 
 const clearAndClose = () => {
   modifiedItemIndex = "";
@@ -128,24 +128,24 @@ const clearAndClose = () => {
   container.classList.remove("add-active");
 };
 
-/* Generate the current date */
+// Generate the current date
 
 const today = () => (date.textContent = formatDateShort(formatDateLong(new Date())));
 
-/* Calculate the number of days between a DLC and today */
+// Calculate the number of days between a DLC and today
 
-const diff = (date) => Math.ceil((new Date(date) - new Date()) / d);
+const diff = date => Math.ceil((new Date(date) - new Date()) / d);
 
-/* Choose and colorize the icon of the elements according to the remaining time and the Opened setting */
+// Choose and colorize the icon of the elements according to the remaining time and the Opened setting
 
-const chooseSmiley = (num) => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
-const colorizeSmiley = (num) => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
+const chooseSmiley = num => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
+const colorizeSmiley = num => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
 
-/* Check the radio buttons */
+// Check the radio buttons
 
 const checkIfOpened = () => (newItemOpened === "true" ? (formOpenedYes.checked = true) : (formOpenedNo.checked = true));
 
-/* Display Panel Add */
+// Display Panel Add
 
 btnAdd.addEventListener("click", () => {
   formTitle.innerHTML = "Ajouter un produit";
@@ -155,18 +155,18 @@ btnAdd.addEventListener("click", () => {
 });
 btnCloseAdd.addEventListener("click", clearAndClose);
 
-/* Events on the icons of each item in the list */
+// Events on the icons of each item in the list
 
-list.addEventListener("click", (e) => {
+list.addEventListener("click", e => {
   const index = e.target.parentElement.parentElement.dataset.index;
 
-  /* Activate the tooltip for remaining days or the tooltip for the specified recipe */
+  // Activate the tooltip for remaining days or the tooltip for the specified recipe
   if (e.target.classList.contains("smiley") || e.target.classList.contains("icon-recipe")) {
     e.target.classList.add("active");
     window.setTimeout(() => e.target.classList.remove("active"), 1000);
   }
 
-  /* Edit one item in the list */
+  // Edit one item in the list
   if (e.target.classList.contains("btn-edit")) {
     formTitle.innerHTML = "Modifier un produit";
     btnSubmit.innerHTML = '<i class="fa fa-pencil"></i>Modifier';
@@ -185,7 +185,7 @@ list.addEventListener("click", (e) => {
     modifiedItemIndex = index;
   }
 
-  /* Delete one item in the list */
+  // Delete one item in the list
 
   if (e.target.classList.contains("btn-delete")) {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
@@ -196,7 +196,7 @@ list.addEventListener("click", (e) => {
   }
 });
 
-/* Delete the whole list */
+// Delete the whole list
 
 btnDeleteAll.addEventListener("click", () => {
   if (window.confirm("Êtes-vous sûr de vouloir supprimer toute la liste ?")) {
@@ -206,16 +206,16 @@ btnDeleteAll.addEventListener("click", () => {
   }
 });
 
-/* Add item to list */
+// Add item to list
 
 formName.addEventListener("keyup", () => (newItemName = formName.value.trim()));
 formName.addEventListener("change", () => (newItemName = formName.value.trim()));
 formDate.addEventListener("change", () => (newItemDate = formDate.value));
 formRecipe.addEventListener("keyup", () => (newItemRecipe = formRecipe.value.trim()));
 formRecipe.addEventListener("change", () => (newItemRecipe = formRecipe.value.trim()));
-formOpened.forEach((btn) => btn.addEventListener("change", () => (newItemOpened = btn.value)));
+formOpened.forEach(btn => btn.addEventListener("change", () => (newItemOpened = btn.value)));
 
-btnSubmit.addEventListener("click", (e) => {
+btnSubmit.addEventListener("click", e => {
   e.preventDefault();
   if (newItemName === "" || newItemDate === "") {
     alert("Vous devez renseigner le nom et la DLC du produit à ajouter.");
@@ -233,6 +233,6 @@ btnSubmit.addEventListener("click", (e) => {
   }
 });
 
-/* Start */
+// Start
 
 generateList();

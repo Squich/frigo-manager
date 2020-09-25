@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <title>Frigo Manager</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="style.css" />
-    <title>Frigo Manager</title>
   </head>
 
   <body>
     <div id="container">
       <section id="header">
+        <div class="log-container">
+          <div>
+            <input id="txt-email" type="email" placeholder="Email" />
+            <input id="txt-password" type="password" placeholder="Mot de passe" />
+          </div>
+          <div>
+            <button id="btn-login" class="login">Connection</button>
+            <button id="btn-signup" class="signup">Inscription</button>
+            <button id="btn-logout" class="logout hide">Déconnection</button>
+          </div>
+        </div>
         <p class="title">Frigo Manager</p>
         <div class="buttons">
           <button id="btn-add" class="btn-add"><i class="fa fa-plus"></i>Ajouter</button>
@@ -66,7 +77,27 @@
       </section>
     </div>
 
-    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/4ad13589b0.js" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var firebaseConfig = {
+        apiKey: "AIzaSyCF_fApHKSSNpAYPF3yKP4-XdpatKVL-Qs",
+        authDomain: "frigo-manager.firebaseapp.com",
+        databaseURL: "https://frigo-manager.firebaseio.com",
+        projectId: "frigo-manager"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      // make auth and firestore references
+      //const auth = firebase.auth();
+      //const db = firebase.firestore();
+    </script>
+
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/index.js"></script>
   </body>
 </html>
