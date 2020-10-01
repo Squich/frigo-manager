@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>Frigo Manager</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+     <head>
+          <title>Frigo Manager</title>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <link rel="stylesheet" href="style.css" />
+     </head>
 
-  <body>
-    <div id="container">
-      <section id="header">
-        <div class="log-container">
-          <div>
-            <input id="txt-email" type="email" placeholder="Email" />
-            <input id="txt-password" type="password" placeholder="Mot de passe" />
+     <body>
+          <div id="container">
+               <section id="header">
+                    <div class="log-container">
+                         <div id="email-log"></div>
+                         <div id="inputs-log">
+                              <input id="txt-email" type="email" placeholder="Email" />
+                              <input id="txt-password" type="password" placeholder="Mot de passe" />
+                         </div>
+                         <div id="buttons-log">
+                              <!--<button id="btn-signup" class="signup">Inscription</button>-->
+                              <button id="btn-login" class="login">Connection</button>
+                              <button id="btn-logout" class="logout">Déconnection</button>
+                         </div>
+                    </div>
+                    <p class="title">Frigo Manager</p>
+               </section>
+
+               <section id="content">
+                    <div class="buttons">
+                         <button id="btn-add" class="btn-add"><i class="fa fa-plus"></i>Ajouter</button>
+                         <button id="btn-delete-all"><i class="fa fa-trash"></i></button>
+                    </div>
+                    <p class="today">Date d'aujourd'hui : <span id="date"></span></p>
+                    <p id="empty"></p>
+                    <ul id="list"></ul>
+               </section>
+
+               <section id="panel-add">
+                    <i id="btn-close-add" class="fa fa-times"></i>
+                    <form id="form" class="form">
+                         <p class="title" id="form-title"></p>
+                         <div class="form-section">
+                              <label for="form-name">Nom<span class="asterisk">*</span></label>
+                              <input type="text" id="form-name" name="form-name" maxlength="20" placeholder="Nom du produit" autocomplete="off" />
+                         </div>
+                         <div class="form-section">
+                              <label for="form-date">DLC<span class="asterisk">*</span></label>
+                              <input type="date" id="form-date" name="form-date" />
+                         </div>
+                         <div class="form-section">
+                              <label for="form-recipe">Recette</label>
+                              <input type="text" id="form-recipe" name="form-recipe" maxlength="20" placeholder="Nom de la recette" autocomplete="off" />
+                         </div>
+                         <div class="form-section">
+                              <p>Entamé</p>
+                              <div class="radio-container">
+                                   <input type="radio" id="opened-yes" name="opened" value="true" />
+                                   <label for="opened-yes">Oui</label>
+                              </div>
+                              <div class="radio-container">
+                                   <input type="radio" id="opened-no" name="opened" value="false" />
+                                   <label for="opened-no">Non</label>
+                              </div>
+                         </div>
+                         <button type="submit" id="btn-submit" class="btn-add">
+                              <i class="fa fa-plus"></i>
+                         </button>
+                         <p class="mention"><span class="asterisk">*</span>Obligatoire</p>
+                    </form>
+               </section>
+
+               <section id="footer">
+                    <p>
+                         Fait avec <i class="fa fa-heart"></i> par
+                         <a href="https://github.com/Squich" target="_blank">Squich</a>
+                    </p>
+               </section>
           </div>
-          <div>
-            <button id="btn-login" class="login">Connection</button>
-            <button id="btn-signup" class="signup">Inscription</button>
-            <button id="btn-logout" class="logout hide">Déconnection</button>
-          </div>
-        </div>
-        <p class="title">Frigo Manager</p>
-        <div class="buttons">
-          <button id="btn-add" class="btn-add"><i class="fa fa-plus"></i>Ajouter</button>
-          <button id="btn-delete-all"><i class="fa fa-trash"></i></button>
-        </div>
-      </section>
 
-      <section id="content">
-        <p class="today">Date d'aujourd'hui : <span id="date"></span></p>
-        <p id="empty">Votre liste est vide !</p>
-        <ul id="list"></ul>
-      </section>
+          <script src="https://kit.fontawesome.com/4ad13589b0.js" crossorigin="anonymous"></script>
 
-      <section id="panel-add">
-        <i id="btn-close-add" class="fa fa-times"></i>
-        <form id="form" class="form">
-          <p class="title" id="form-title"></p>
-          <div class="form-section">
-            <label for="form-name">Nom<span class="asterisk">*</span></label>
-            <input type="text" id="form-name" name="form-name" maxlength="20" placeholder="Nom du produit" autocomplete="off" />
-          </div>
-          <div class="form-section">
-            <label for="form-date">DLC<span class="asterisk">*</span></label>
-            <input type="date" id="form-date" name="form-date" />
-          </div>
-          <div class="form-section">
-            <label for="form-recipe">Recette</label>
-            <input type="text" id="form-recipe" name="form-recipe" maxlength="20" placeholder="Nom de la recette" autocomplete="off" />
-          </div>
-          <div class="form-section">
-            <p>Entamé</p>
-            <div class="radio-container">
-              <input type="radio" id="opened-yes" name="opened" value="true" />
-              <label for="opened-yes">Oui</label>
-            </div>
-            <div class="radio-container">
-              <input type="radio" id="opened-no" name="opened" value="false" />
-              <label for="opened-no">Non</label>
-            </div>
-          </div>
-          <button type="submit" id="btn-submit" class="btn-add">
-            <i class="fa fa-plus"></i>
-          </button>
-          <p class="mention"><span class="asterisk">*</span>Obligatoire</p>
-        </form>
-      </section>
-
-      <section id="footer">
-        <p>
-          Fait avec <i class="fa fa-heart"></i> par
-          <a href="https://github.com/Squich" target="_blank">Squich</a>
-        </p>
-      </section>
-    </div>
-
-    <script src="https://kit.fontawesome.com/4ad13589b0.js" crossorigin="anonymous"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
-    <script>
-      // Initialize Firebase
-      var firebaseConfig = {
-        apiKey: "AIzaSyCF_fApHKSSNpAYPF3yKP4-XdpatKVL-Qs",
-        authDomain: "frigo-manager.firebaseapp.com",
-        databaseURL: "https://frigo-manager.firebaseio.com",
-        projectId: "frigo-manager"
-      };
-      firebase.initializeApp(firebaseConfig);
-
-      // make auth and firestore references
-      //const auth = firebase.auth();
-      //const db = firebase.firestore();
-    </script>
-
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/index.js"></script>
-  </body>
+          <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+          <script>
+               var firebaseConfig = {
+                    apiKey: "AIzaSyCF_fApHKSSNpAYPF3yKP4-XdpatKVL-Qs",
+                    authDomain: "frigo-manager.firebaseapp.com",
+                    databaseURL: "https://frigo-manager.firebaseio.com",
+                    projectId: "frigo-manager",
+                    storageBucket: "frigo-manager.appspot.com",
+                    messagingSenderId: "739506312679",
+                    appId: "1:739506312679:web:4a12b8a6777279b17d9942"
+               };
+               firebase.initializeApp(firebaseConfig);
+               const auth = firebase.auth();
+               const db = firebase.firestore();
+          </script>
+          <script src="./scripts/auth-firebase.js"></script>
+          <script src="./scripts/index-firebase.js"></script>
+     </body>
 </html>
