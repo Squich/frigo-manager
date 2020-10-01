@@ -35,8 +35,8 @@ const d = 1000 * 60 * 60 * 24;
 
 // Date formats
 
-const formatDateLong = (date) => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
-const formatDateShort = (str) => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
+const formatDateLong = date => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
+const formatDateShort = str => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
 
 // Generate list with listItems
 
@@ -81,7 +81,7 @@ function generateList() {
                // Smiley
 
                const smiley = document.createElement("i");
-               smiley.className = "smiley fa " + chooseSmiley(item.opened === "false" || !item.opened ? diff(item.date) : Infinity) + " " + colorizeSmiley(diff(item.date));
+               smiley.className = "smiley fa " + chooseIcon(item.opened === "false" || !item.opened ? diff(item.date) : Infinity) + " " + colorize(diff(item.date));
                listItem.querySelector(".smiley-container").prepend(smiley);
 
                list.appendChild(listItem);
@@ -149,12 +149,12 @@ const today = () => (date.textContent = formatDateShort(formatDateLong(new Date(
 
 // Calculate the number of days between a DLC and today
 
-const diff = (date) => Math.ceil((new Date(date) - new Date()) / d);
+const diff = date => Math.ceil((new Date(date) - new Date()) / d);
 
 // Choose and colorize the icon of the elements according to the remaining time and the Opened setting
 
-const chooseSmiley = (num) => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
-const colorizeSmiley = (num) => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
+const chooseIcon = num => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
+const colorize = num => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
 
 // Check the radio buttons
 
@@ -177,7 +177,7 @@ btnCloseAdd.addEventListener("click", clearAndClose);
 
 // Events on the icons of each item in the list
 
-list.addEventListener("click", (e) => {
+list.addEventListener("click", e => {
      const index = e.target.parentElement.parentElement.dataset.index;
 
      // Activate the tooltip for remaining days or the tooltip for the specified recipe
@@ -233,9 +233,9 @@ formName.addEventListener("change", () => (newItemName = formName.value.trim()))
 formDate.addEventListener("change", () => (newItemDate = formDate.value));
 formRecipe.addEventListener("keyup", () => (newItemRecipe = formRecipe.value.trim()));
 formRecipe.addEventListener("change", () => (newItemRecipe = formRecipe.value.trim()));
-formOpened.forEach((btn) => btn.addEventListener("change", () => (newItemOpened = btn.value)));
+formOpened.forEach(btn => btn.addEventListener("change", () => (newItemOpened = btn.value)));
 
-btnSubmit.addEventListener("click", (e) => {
+btnSubmit.addEventListener("click", e => {
      e.preventDefault();
      if (newItemName === "" || newItemDate === "") {
           alert("Vous devez renseigner le nom et la DLC du produit à ajouter.");

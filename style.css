@@ -204,19 +204,19 @@ body {
      flex-wrap: nowrap;
      min-height: 34px;
 }
-#list i.maroon {
+#list .maroon {
      color: maroon;
 }
-#list i.black {
+#list .black {
      color: black;
 }
-#list i.green {
+#list .green {
      color: green;
 }
-#list i.orange {
+#list .orange {
      color: orange;
 }
-#list i.red {
+#list .red {
      color: red;
 }
 #list li .name {
@@ -224,6 +224,7 @@ body {
 }
 #list li .date {
      padding: 0 15px 0 5px;
+     font-weight: 700;
 }
 #list li i {
      display: flex;
@@ -397,7 +398,6 @@ body {
           box-shadow: none;
      }
      #header .title,
-     .buttons,
      #content,
      #panel-add,
      #footer {
