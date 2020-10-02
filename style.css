@@ -65,13 +65,13 @@ body {
      align-items: center;
 }
 #buttons-log button {
-     width: 110px;
+     width: 32%;
      padding: 10px;
      margin: 0 3px;
      border: none;
      border-radius: 50px;
      color: #fff;
-     font-size: 9px;
+     font-size: 8px;
      line-height: 1;
      font-weight: 700;
      text-transform: uppercase;
