@@ -2,15 +2,12 @@
 
 const container = document.getElementById("container");
 const date = document.getElementById("date");
-
 const btnAdd = document.getElementById("btn-add");
-const btnCloseAdd = document.getElementById("btn-close-add");
-
+const btnDeleteAll = document.getElementById("btn-delete-all");
 const empty = document.getElementById("empty");
 const list = document.getElementById("list");
-const btnDeleteAll = document.getElementById("btn-delete-all");
-
-const formAdd = document.getElementById("form");
+const formProduct = document.getElementById("form-product");
+const btnCloseFormProduct = document.getElementById("btn-close-form-product");
 const formTitle = document.getElementById("form-title");
 const formName = document.getElementById("form-name");
 const formDate = document.getElementById("form-date");
@@ -35,12 +32,29 @@ const d = 1000 * 60 * 60 * 24;
 
 // Date formats
 
-const formatDateLong = date => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
-const formatDateShort = str => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
+const formatDateLong = (date) => `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}-${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;
+const formatDateShort = (str) => str.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2");
+
+// Generate startList
+
+// const generateDate = (num) => formatDateLong(new Date(new Date().getTime() + num));
+
+// const startList = [
+//      {name: "Saumon", date: generateDate(-d * 9), recipe: "", opened: "true"},
+//      {name: "Fromage rapé", date: generateDate(-d * 3), recipe: "Omelette", opened: "false"},
+//      {name: "Crème fraiche", date: generateDate(0), recipe: "Chantilly", opened: "false"},
+//      {name: "Saucisses", date: generateDate(d * 2), recipe: "", opened: "true"},
+//      {name: "Lardons", date: generateDate(d * 2), recipe: "Salade composée", opened: "false"},
+//      {name: "Camembert", date: generateDate(d * 4), recipe: "", opened: "false"},
+//      {name: "Lait", date: generateDate(d * 5), recipe: "", opened: "false"},
+//      {name: "Pizza", date: generateDate(d * 7), recipe: "", opened: "true"},
+//      {name: "Gnocchis", date: generateDate(d * 10), recipe: "", opened: "false"}
+// ];
 
 // Generate list with listItems
 
 function generateList() {
+     // getListItemsFromLocalStorage();
      list.innerHTML = "";
      today();
      checkEmpty();
@@ -87,6 +101,11 @@ function generateList() {
                list.appendChild(listItem);
           });
 }
+
+// Set and Get from Local Storage
+
+// const setListItemsToLocalStorage = () => localStorage.setItem("listItems", JSON.stringify(listItems));
+// const getListItemsFromLocalStorage = () => (listItems = JSON.parse(localStorage.getItem("listItems")) || startList);
 
 // Update listItems on Firebase
 
@@ -139,8 +158,8 @@ const clearAndClose = () => {
      newItemDate = "";
      newItemRecipe = "";
      newItemOpened = "false";
-     formAdd.reset();
-     container.classList.remove("add-active");
+     formProduct.reset();
+     container.classList.remove("form-product-active");
 };
 
 // Generate the current date
@@ -149,18 +168,18 @@ const today = () => (date.textContent = formatDateShort(formatDateLong(new Date(
 
 // Calculate the number of days between a DLC and today
 
-const diff = date => Math.ceil((new Date(date) - new Date()) / d);
+const diff = (date) => Math.ceil((new Date(date) - new Date()) / d);
 
 // Choose and colorize the icon of the elements according to the remaining time and the Opened setting
 
-const chooseIcon = num => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
-const colorize = num => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
+const chooseIcon = (num) => (num < 0 ? "fa-frown-o" : num < 4 ? "fa-meh-o" : num === Infinity ? "fa-exclamation" : "fa-smile-o");
+const colorize = (num) => (num < 0 ? "black" : num < 2 ? "red" : num < 4 ? "orange" : "green");
 
 // Check the radio buttons
 
 const checkIfOpened = () => (newItemOpened === "true" ? (formOpenedYes.checked = true) : (formOpenedNo.checked = true));
 
-// Display Panel Add
+// Display Panel FormProduct
 
 btnAdd.addEventListener("click", () => {
      const user = auth.currentUser;
@@ -168,16 +187,16 @@ btnAdd.addEventListener("click", () => {
           formTitle.innerHTML = "Ajouter un produit";
           btnSubmit.innerHTML = '<i class="fa fa-plus"></i>Ajouter';
           checkIfOpened();
-          container.classList.add("add-active");
+          container.classList.add("form-product-active");
      } else {
           alert("Connectez-vous pour ajouter un produit :)");
      }
 });
-btnCloseAdd.addEventListener("click", clearAndClose);
+btnCloseFormProduct.addEventListener("click", clearAndClose);
 
 // Events on the icons of each item in the list
 
-list.addEventListener("click", e => {
+list.addEventListener("click", (e) => {
      const index = e.target.parentElement.parentElement.dataset.index;
 
      // Activate the tooltip for remaining days or the tooltip for the specified recipe
@@ -203,7 +222,7 @@ list.addEventListener("click", e => {
           formRecipe.value = listItems[index].recipe || "";
           checkIfOpened();
 
-          container.classList.add("add-active");
+          container.classList.add("form-product-active");
           modifiedItemIndex = index;
      }
 
@@ -213,6 +232,8 @@ list.addEventListener("click", e => {
           if (window.confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
                listItems.splice(index, 1);
                updateListItems();
+               // setListItemsToLocalStorage();
+               // generateList();
           }
      }
 });
@@ -223,6 +244,8 @@ btnDeleteAll.addEventListener("click", () => {
      if (window.confirm("Êtes-vous sûr de vouloir supprimer toute la liste ?")) {
           listItems.splice(0, listItems.length);
           updateListItems();
+          // setListItemsToLocalStorage();
+          // generateList();
      }
 });
 
@@ -233,9 +256,9 @@ formName.addEventListener("change", () => (newItemName = formName.value.trim()))
 formDate.addEventListener("change", () => (newItemDate = formDate.value));
 formRecipe.addEventListener("keyup", () => (newItemRecipe = formRecipe.value.trim()));
 formRecipe.addEventListener("change", () => (newItemRecipe = formRecipe.value.trim()));
-formOpened.forEach(btn => btn.addEventListener("change", () => (newItemOpened = btn.value)));
+formOpened.forEach((btn) => btn.addEventListener("change", () => (newItemOpened = btn.value)));
 
-btnSubmit.addEventListener("click", e => {
+btnSubmit.addEventListener("click", (e) => {
      e.preventDefault();
      if (newItemName === "" || newItemDate === "") {
           alert("Vous devez renseigner le nom et la DLC du produit à ajouter.");
@@ -248,6 +271,8 @@ btnSubmit.addEventListener("click", e => {
                opened: newItemOpened
           });
           updateListItems();
+          // setListItemsToLocalStorage();
+          // generateList();
           clearAndClose();
      }
 });
@@ -255,3 +280,4 @@ btnSubmit.addEventListener("click", e => {
 // Start
 
 loadListItems();
+// generateList();

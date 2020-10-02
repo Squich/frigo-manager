@@ -11,7 +11,7 @@
      <body>
           <div id="container">
                <section id="header">
-                    <div class="log-container">
+                    <div id="log-container">
                          <div id="email-log"></div>
                          <div id="inputs-log">
                               <input id="txt-email" type="email" placeholder="Email" />
@@ -27,18 +27,18 @@
                </section>
 
                <section id="content">
-                    <div class="buttons">
+                    <div id="buttons">
                          <button id="btn-add" class="btn-add"><i class="fa fa-plus"></i>Ajouter</button>
                          <button id="btn-delete-all"><i class="fa fa-trash"></i></button>
                     </div>
-                    <p class="today">Date d'aujourd'hui : <span id="date"></span></p>
+                    <p id="today">Date d'aujourd'hui : <span id="date"></span></p>
                     <p id="empty"></p>
                     <ul id="list"></ul>
                </section>
 
-               <section id="panel-add">
-                    <i id="btn-close-add" class="fa fa-times"></i>
-                    <form id="form" class="form">
+               <section id="panel-form-product">
+                    <i id="btn-close-form-product" class="fa fa-times"></i>
+                    <form id="form-product" class="form">
                          <p class="title" id="form-title"></p>
                          <div class="form-section">
                               <label for="form-name">Nom<span class="asterisk">*</span></label>

@@ -32,7 +32,7 @@ body {
 #header {
      background: url(https://uploads.codesandbox.io/uploads/user/e053aac6-6b36-4672-8d8c-50638450fb87/EHe2-entete-frigo.jpg) center / cover no-repeat;
 }
-.log-container {
+#log-container {
      position: relative;
      padding: 15px 35px 0;
 }
@@ -108,7 +108,7 @@ body {
 #content {
      padding: 25px 35px;
 }
-.buttons {
+#buttons {
      display: flex;
      justify-content: space-between;
      align-items: center;
@@ -156,7 +156,7 @@ body {
 #btn-delete-all.active {
      display: flex;
 }
-.today {
+#today {
      font-size: 14px;
      margin: 0 0 15px;
 }
@@ -278,9 +278,9 @@ body {
      opacity: 1;
 }
 
-/* PANEL-ADD */
+/* PANEL-FORM-PRODUCT */
 
-#panel-add {
+#panel-form-product {
      display: none;
      position: absolute;
      top: 0;
@@ -291,10 +291,10 @@ body {
      background: #fff;
      z-index: 1;
 }
-#container.add-active #panel-add {
+#container.form-product-active #panel-form-product {
      display: block;
 }
-#btn-close-add {
+#btn-close-form-product {
      position: absolute;
      top: 15px;
      right: 15px;
@@ -303,7 +303,7 @@ body {
      cursor: pointer;
      color: #a7a7a7;
 }
-#panel-add .title {
+#panel-form-product .title {
      font-size: 1.2em;
      line-height: 1;
      text-transform: uppercase;
@@ -311,7 +311,7 @@ body {
      color: #151515;
      margin: 0 0 25px;
 }
-#panel-add .btn-add {
+#panel-form-product .btn-add {
      margin-top: 25px;
 }
 .form-section {
