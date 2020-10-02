@@ -102,7 +102,7 @@ function generateList() {
           });
 }
 
-// Set and Get from Local Storage
+// Set and Get listItems from Local Storage
 
 // const setListItemsToLocalStorage = () => localStorage.setItem("listItems", JSON.stringify(listItems));
 // const getListItemsFromLocalStorage = () => (listItems = JSON.parse(localStorage.getItem("listItems")) || startList);
