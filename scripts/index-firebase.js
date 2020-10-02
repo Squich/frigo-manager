@@ -115,14 +115,11 @@ const updateListItems = () => {
           .update({
                listItems: listItems
           })
-          .then(function () {
+          .then(() => {
                console.log("Document successfully updated!");
                generateList();
           })
-          .catch(function (error) {
-               // The document probably doesn't exist.
-               console.error("Error updating document: ", error);
-          });
+          .catch((error) => console.error("Error updating document: ", error));
 };
 
 // Get ListItems from Firebase
@@ -131,19 +128,16 @@ const loadListItems = () => {
      const frigoRef = db.collection("frigoManager").doc("frigo");
      frigoRef
           .get()
-          .then(function (doc) {
+          .then((doc) => {
                if (doc.exists) {
                     console.log("Document data:", doc.data());
                     listItems = doc.data().listItems;
                     generateList();
                } else {
-                    // doc.data() will be undefined in this case
                     console.log("No such document!");
                }
           })
-          .catch(function (error) {
-               console.log("Error getting document:", error);
-          });
+          .catch((error) => console.log("Error getting document:", error));
 };
 
 // Display a message if the list is empty
